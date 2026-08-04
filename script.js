@@ -4,7 +4,7 @@ const REFRESH_MS = 30_000;
 
 const el = (id) => document.getElementById(id);
 const ui = {
-  avatar: el("avatar"), avatarFallback: el("avatar-fallback"), displayName: el("display-name"),
+  avatar: el("avatar"), displayName: el("display-name"),
   username: el("username"), statusDot: el("status-dot"), statusLabel: el("status-label"),
   customStatus: el("custom-status"), presenceArea: el("presence-area"), presenceGrid: el("presence-grid"),
   activityCard: el("activity-card"), activityArt: el("activity-art"), activityName: el("activity-name"),
@@ -19,10 +19,6 @@ let currentSpotifyTimestamps = null;
 let lastKnownData = null;
 
 const statusText = { online: "online", idle: "idle", dnd: "do not disturb", offline: "offline" };
-
-function initials(name) {
-  return (name || "?").trim().slice(0, 1).toUpperCase() || "?";
-}
 
 function avatarUrl(user) {
   if (!user?.avatar) return null;
@@ -127,19 +123,12 @@ function render(data, cached = false) {
   ui.displayName.textContent = name;
   document.title = `${name} — Discord Presence`;
   ui.username.textContent = user.username ? `@${user.username}` : "@unknown";
-  ui.avatarFallback.textContent = initials(name);
   if (avatar) {
-    ui.avatar.onload = () => { ui.avatarFallback.hidden = true; };
-    ui.avatar.onerror = () => {
-      ui.avatar.hidden = true;
-      ui.avatarFallback.hidden = false;
-    };
-    ui.avatarFallback.hidden = true;
+    ui.avatar.onerror = () => { ui.avatar.hidden = true; };
     ui.avatar.src = avatar;
     ui.avatar.hidden = false;
   } else {
     ui.avatar.hidden = true;
-    ui.avatarFallback.hidden = false;
   }
   setStatus(data.discord_status);
   setCustomStatus(custom);
