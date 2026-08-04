@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A live Discord profile powered by Lanyard." />
+    <meta name="theme-color" content="#090a0d" />
+    <title>Discord Presence</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="scene" aria-hidden="true">
+      <div class="scene__art"></div>
+      <div class="scene__veil"></div>
+      <div class="aurora aurora--one"></div>
+      <div class="aurora aurora--two"></div>
+      <div class="orb orb--one"></div>
+      <div class="orb orb--two"></div>
+      <canvas id="starfield"></canvas>
+      <div class="grain"></div>
+    </div>
+
+    <main class="page-shell">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="wordmark" href="#top" aria-label="Live presence home">
+          <span class="wordmark__mark"></span>
+          <span>presence</span>
+        </a>
+        <span class="nav-status"><span class="nav-status__pulse"></span>live via lanyard</span>
+      </nav>
+
+      <section class="profile" id="top" aria-labelledby="display-name">
+        <div class="profile__glow" aria-hidden="true"></div>
+        <div class="profile__topline">
+          <p class="kicker">discord presence <span aria-hidden="true">/</span> 1370490512552890368</p>
+          <button class="refresh" id="refresh-button" type="button" aria-label="Refresh Discord presence">
+            <span aria-hidden="true">↻</span> refresh
+          </button>
+        </div>
+
+        <div class="identity">
+          <div class="avatar-wrap">
+            <div class="avatar-fallback" id="avatar-fallback" aria-hidden="true">?</div>
+            <img id="avatar" class="avatar" alt="Discord profile avatar" hidden />
+            <span id="status-dot" class="status-dot status-dot--offline" aria-hidden="true"></span>
+          </div>
+          <div class="identity__copy">
+            <p class="eyebrow" id="status-label">finding a signal</p>
+            <h1 id="display-name">Discord profile</h1>
+            <p class="username" id="username">@username</p>
+            <p class="custom-status" id="custom-status">Connecting to Lanyard…</p>
+          </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <div class="presence-grid">
+          <article class="presence-card activity-card" id="activity-card">
+            <div class="card-heading">
+              <span class="card-index">01</span>
+              <p>current activity</p>
+            </div>
+            <div class="activity-body" id="activity-body">
+              <div class="activity-art activity-art--fallback" id="activity-art" aria-hidden="true">✦</div>
+              <div>
+                <h2 id="activity-name">Standing by</h2>
+                <p id="activity-detail">No active game or app right now.</p>
+                <p class="activity-time" id="activity-time"></p>
+              </div>
+            </div>
+          </article>
+
+          <article class="presence-card spotify-card" id="spotify-card">
+            <div class="card-heading">
+              <span class="card-index">02</span>
+              <p>spotify</p>
+            </div>
+            <div class="spotify-empty" id="spotify-empty">
+              <span class="spotify-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <p>Nothing playing on Spotify.</p>
+            </div>
+            <div class="spotify-body" id="spotify-body" hidden>
+              <img id="spotify-art" class="spotify-art" alt="Spotify album artwork" />
+              <div class="spotify-copy">
+                <p class="spotify-now"><span></span> listening now</p>
+                <h2 id="spotify-song">Track</h2>
+                <p id="spotify-artist">Artist</p>
+                <div class="progress" aria-label="Song progress"><span id="spotify-progress"></span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="profile__footer">
+          <p id="connection-note" role="status">Presence updates every 30 seconds.</p>
+          <p id="last-updated">—</p>
+        </div>
+      </section>
+
+      <p class="credit">A small window into the now.</p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
